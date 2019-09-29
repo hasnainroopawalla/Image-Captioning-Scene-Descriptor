@@ -6,13 +6,13 @@ import colorsys
 import argparse
 import imutils
 import random
-import cv2
+import cv2 as cv2
 import os
 import skimage.io
-import keras
+from keras import backend as K
 
 def getobj(image):
-  keras.clear_session()
+  K.clear_session()
   class_names = ['BG', 'person', 'bicycle', 'car', 'motorcycle', 'airplane',
                 'bus', 'train', 'truck', 'boat', 'traffic light',
                 'fire hydrant', 'stop sign', 'parking meter', 'bench', 'bird',
@@ -30,9 +30,11 @@ def getobj(image):
                 'teddy bear', 'hair drier', 'toothbrush']
 
   def id_to_class(obj_ids):
+    objs = []
     obj_ids = dict((x,list(obj_ids).count(x)) for x in set(obj_ids))
     for i in obj_ids:
-      print(obj_ids[i],' '+class_names[i])
+      objs.append(str(obj_ids[i])+' '+str(class_names[i]))
+    return objs
       
   ROOT_DIR = os.path.abspath("")
   MODEL_DIR = os.path.join(ROOT_DIR, "logs")
@@ -56,10 +58,11 @@ def getobj(image):
   #image = skimage.io.imread('plane.jpg')
 
   results = model.detect([image], verbose=1)
-  id_to_class(results[0]['class_ids'])
-  keras.clear_session()
-  return 'hi'
-  # r = results[0]
-  # visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
-  #                             class_names, r['scores'])
-
+  objs = id_to_class(results[0]['class_ids'])
+  K.clear_session()
+  
+  r = results[0]
+  a = visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
+                              class_names, r['scores'])
+  a.savefig('static/images/out.png')
+  return objs
