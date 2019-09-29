@@ -67,28 +67,3 @@ r = results[0]
 visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
                             class_names, r['scores'])
 
-
-##
-##sys.path.append(os.path.join(ROOT_DIR, "samples/coco/"))
-##import coco
-##
-##
-##class InferenceConfig(coco.CocoConfig):
-##    # Set batch size to 1 since we'll be running inference on
-##    # one image at a time. Batch size = GPU_COUNT * IMAGES_PER_GPU
-##    GPU_COUNT = 1
-##    IMAGES_PER_GPU = 1 #2
-##    
-##config = InferenceConfig()
-##config.display()
-##
-##
-### Create model object in inference mode.
-##model = modellib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
-##
-### Load weights trained on MS-COCO
-##model.load_weights(COCO_MODEL_PATH, by_name=True)
-
-#model = load_model('mask_rcnn_coco.h5')
-##new_model = keras.models.load_model('mask_rcnn_coco.h5')
-##model = modellib.MaskRCNN(mode="inference", model_dir=MODEL_DIR, config=config)
