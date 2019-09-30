@@ -30,10 +30,10 @@ def getobj(image):
                 'teddy bear', 'hair drier', 'toothbrush']
 
   def id_to_class(obj_ids):
-    objs = []
+    objs = {}
     obj_ids = dict((x,list(obj_ids).count(x)) for x in set(obj_ids))
     for i in obj_ids:
-      objs.append(str(obj_ids[i])+' '+str(class_names[i]))
+      objs[class_names[i]] = obj_ids[i]
     return objs
       
   ROOT_DIR = os.path.abspath("")
@@ -64,5 +64,5 @@ def getobj(image):
   r = results[0]
   a = visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
                               class_names, r['scores'])
-  a.savefig('static/images/out.png')
+  a.savefig('static/images/maskrcnn_out.png')
   return objs

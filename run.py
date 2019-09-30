@@ -21,14 +21,14 @@ def newimage():
     file = request.files['file']
     inputimg = Image.open(file).convert('RGB')
     img = numpy.array(inputimg)
-    
+
+    print()
     start = time.time()
     maskrcnn_objs = maskrcnn.getobj(img)
     end = time.time()
-    print('Mask-RCNN:')
+    print('\nMask-RCNN:')
     print(maskrcnn_objs)
     print('Time:',end-start)
-    
     print()
     
     start = time.time()
@@ -37,11 +37,11 @@ def newimage():
     print('YOLO V3:')
     print(yolo_objs)
     print('Time:',end-start)
-    
-    # b = Image.open('static/images/out.png')
-    # # b.show()
+    print()
+##    maskrcnn_out = cv2.imread('static/images/maskrcnn_out.png')
+##    yolo_out = cv2.imread('static/images/yolo_out.png')
+
     return redirect('/')
 
 if __name__ == "__main__":
-    #threading.Timer(1.25, lambda: webbrowser.open("http://127.0.0.1:9000")).start()
     app.run(host= '0.0.0.0', port=5000, debug=True)
