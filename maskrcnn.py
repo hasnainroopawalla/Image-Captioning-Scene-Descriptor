@@ -64,5 +64,5 @@ def getobj(image):
   r = results[0]
   a = visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'], 
                               class_names, r['scores'])
-  a.savefig('static/images/maskrcnn_out.png')
+  a.savefig('static/images/out.png')
   return objs
