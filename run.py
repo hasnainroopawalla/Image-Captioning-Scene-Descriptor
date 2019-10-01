@@ -3,6 +3,7 @@ from PIL import Image
 import numpy
 import cv2
 import time
+import werkzeug
 
 app = Flask(__name__)
 
@@ -14,7 +15,7 @@ def firstpage():
     return render_template('index.html',objs=objs)
 
 @app.route("/getobjects",methods=["GET", "POST"])
-def newimage():
+def objectdetection():
     import maskrcnn
     import yolo
     global objs
