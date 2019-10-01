@@ -25,6 +25,7 @@ def handle_request():
         
         imagefile.save('static/androidimgs/androidimg.jpg')
         img = load_images_from_folder('static/androidimgs')[0]
+        img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
 
         import maskrcnn
         import yolo

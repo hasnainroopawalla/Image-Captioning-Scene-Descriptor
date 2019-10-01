@@ -123,6 +123,6 @@ def getobj(img):
     height, width = img.shape[:2]
     img, _, _, _, _, objs = infer_image(net, layer_names, height, width, img, colors, labels, confidence, threshold, show_time)
 
-    cv.imwrite("static/images/yolo_out.png", img)
+    cv.imwrite("static/output/yolo_out.png", img)
     return objs
 
