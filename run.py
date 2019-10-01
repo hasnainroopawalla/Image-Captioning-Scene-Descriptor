@@ -26,7 +26,7 @@ def newimage():
     start = time.time()
     maskrcnn_objs = maskrcnn.getobj(img)
     end = time.time()
-    print('\nMask-RCNN:')
+    print('\nMask-RCNN: ')
     print(maskrcnn_objs)
     print('Time:',end-start)
     print()
