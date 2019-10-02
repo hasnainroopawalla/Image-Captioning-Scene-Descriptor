@@ -38,8 +38,10 @@ def newimage():
     print(yolo_objs)
     print('Time:',end-start)
     print()
-##    maskrcnn_out = cv2.imread('static/images/maskrcnn_out.png')
-##    yolo_out = cv2.imread('static/images/yolo_out.png')
+    # maskout = cv2.imread('static/images/maskrcnn_out.png')
+    # yoloout = cv2.imread('static/images/yolo_out.png')
+    # return render_template('display.html',maskout=maskout, yoloout=yoloout)
+
 
     return redirect('/')
 
