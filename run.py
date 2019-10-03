@@ -4,6 +4,7 @@ import numpy
 import cv2
 import time
 import werkzeug
+import os
 
 app = Flask(__name__)
 
@@ -44,7 +45,7 @@ def objectdetection():
     # return render_template('display.html',maskout=maskout, yoloout=yoloout)
 
 
-    return redirect('/')
+    return render_template('display.html')
 
 if __name__ == "__main__":
     app.run(host= '0.0.0.0', port=5000, debug=True)
