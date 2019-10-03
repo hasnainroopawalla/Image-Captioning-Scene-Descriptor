@@ -32,6 +32,7 @@ def objectdetection():
     print(maskrcnn_objs)
     print('Time:',end-start)
     print()
+    masktime = (end-start)
     
     start = time.time()
     yolo_objs = yolo.getobj(img)
@@ -40,12 +41,16 @@ def objectdetection():
     print(yolo_objs)
     print('Time:',end-start)
     print()
+    yolotime = (end-start)
+    print("test")
+    print(yolotime)
+    print(masktime)
     # maskout = cv2.imread('static/images/maskrcnn_out.png')
     # yoloout = cv2.imread('static/images/yolo_out.png')
     # return render_template('display.html',maskout=maskout, yoloout=yoloout)
 
 
-    return render_template('display.html')
+    return render_template('display.html',yolotime=yolotime,masktime=masktime)
 
 if __name__ == "__main__":
     app.run(host= '0.0.0.0', port=5000, debug=True)
