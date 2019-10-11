@@ -23,7 +23,8 @@ def objectdetection():
     file = request.files['file']
     inputimg = Image.open(file).convert('RGB')
     img = numpy.array(inputimg)
-
+    cv2.imwrite('static/flaskimgs/flaskimg.jpg',img)
+    
     print()
     start = time.time()
     maskrcnn_objs = maskrcnn.getobj(img)
