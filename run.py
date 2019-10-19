@@ -23,7 +23,8 @@ def objectdetection():
     file = request.files['file']
     inputimg = Image.open(file).convert('RGB')
     img = numpy.array(inputimg)
-    cv2.imwrite('static/flaskimgs/flaskimg.jpg',img)
+
+    cv2.imwrite('static/flaskimgs/flaskimg.jpg',cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
     
     print()
     start = time.time()
