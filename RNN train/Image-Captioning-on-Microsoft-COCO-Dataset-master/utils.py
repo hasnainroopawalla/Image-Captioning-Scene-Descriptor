@@ -68,7 +68,7 @@ def load_coco_dataset(data_dir=DATA_DIR, PCA_features=True, max_train=None):
     return data
 
 
-def sample_coco_minibatch(data, batch_size=100, split='train'):
+def sample_coco_minibatch(data, batch_size=100, split='val'):
     """
     Sample a small amount of data.
     Arguments:

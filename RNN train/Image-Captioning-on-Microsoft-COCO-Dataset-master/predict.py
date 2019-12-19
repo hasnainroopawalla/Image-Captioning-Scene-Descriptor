@@ -30,15 +30,15 @@ subset_data = load_coco_dataset()#max_train=10000)
 ##with open('save/sub_rnn_model.pickle', 'wb') as f:
 ##    pickle.dump(sub_rnn_model, f)
 ## restore model file
-with open('savefull/sub_rnn_model.pickle', 'rb') as f:
+with open('savefull/sub_rnn_model.pickle1', 'rb') as f:
     sub_rnn_model = pickle.load(f)
 
 ## Image representation for the model performance
 for split in ['train', 'val']:
     # sample mini-batches and ground truth captions
-    minibatch = sample_coco_minibatch(subset_data, split=split, batch_size=3)
+    minibatch = sample_coco_minibatch(data, split=split, batch_size=4)
     gt_captions, features, urls = minibatch
-   
+    print('gt:',gt_captions)
     gt_captions = decode_captions(gt_captions, data['idx_to_word'])
     # generate captions from model
     sample_captions = sub_rnn_model.generate_captions(features)

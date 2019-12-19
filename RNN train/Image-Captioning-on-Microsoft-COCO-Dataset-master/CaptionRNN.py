@@ -100,7 +100,7 @@ class RNNImageCaption(object):
 
         return loss, grads
 
-    def generate_captions(self, features, max_length=30):
+    def generate_captions(self, features, max_length=100):
         """
         Generate captions from the image features.
         Arguments:
@@ -109,6 +109,7 @@ class RNNImageCaption(object):
         Outputs:
             captions: array of generated captions with shape of (N, T) and each element lies in [0, V)
         """
+        
         N, D = features.shape
         captions = self.null * np.ones((N, max_length), dtype=np.int32)  # initialize captions to <NULL>s
 
@@ -137,5 +138,5 @@ class RNNImageCaption(object):
             scores, _ = temporal_affine_forward(h[:, np.newaxis, :], W_vocab, b_vocab)  # note: new axis for dimension match
             capt = np.squeeze(np.argmax(scores, axis=2))
             captions[:, t] = capt  # store generated captions
-
+        print(captions)
         return captions

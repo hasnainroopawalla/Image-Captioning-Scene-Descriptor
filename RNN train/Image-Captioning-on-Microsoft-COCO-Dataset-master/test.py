@@ -15,7 +15,7 @@ subset_data = load_coco_dataset()
 sub_rnn_model = RNNImageCaption(cell_type='rnn', word_to_idx=data['word_to_idx'],
           input_dim=data['train_features'].shape[1], hidden_dim=512, wordvec_dim=256,)
 # train model
-sub_rnn_solver = CaptionTrain(subset_data, sub_rnn_model, update='adam', num_epochs=50,
+sub_rnn_solver = CaptionTrain(data, sub_rnn_model, update='adam', num_epochs=100,
                                 batch_size=100, update_params={'lr': 5e-3}, lr_decay=0.95, print_freq=10)
 sub_rnn_solver.train()
 
@@ -27,7 +27,7 @@ sub_rnn_solver.train()
 # plt.show()
 
 # save model file
-with open('savefull/sub_rnn_model.pickle', 'wb') as f:
+with open('savefull/sub_rnn_model.pickle1', 'wb') as f:
     pickle.dump(sub_rnn_model, f)
 # restore model file
 # with open('save/sub_rnn_model.pickle', 'rb') as f:
