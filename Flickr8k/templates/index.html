@@ -1,0 +1,76 @@
+<html>
+
+  <head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  </head>
+
+<body style="background: #EFF4F7";>
+  <div class="container mt-3">
+    <h2>Upload Image</h2>
+      <div class="custom-file mb-3">
+        <input onchange="readURL(this);" type=file class="custom-file-input" id="multiFiles" name="files[]" multiple="multiple">
+        <label class="custom-file-label" for="customFile">Choose file</label>
+      </div>
+        <button id=upload class="btn btn-primary">Submit</button>
+      <br><br><br>
+      <div class="custom-file mb-3">
+        <img id="blah" src="#"/><br><br>
+        <p id="op">Caption Goes Here</p>
+      </div>
+      </div>
+  </div>
+  
+</body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script type="text/javascript">
+
+  function readURL(input) {  //Preview Image
+          if (input.files && input.files[0]) {
+              var reader = new FileReader();
+              reader.onload = function (e) {
+                  $('#blah')
+                      .attr('src', e.target.result);
+              };
+              reader.readAsDataURL(input.files[0]);
+          }
+      }
+
+		$(document).ready(function (e) {
+			$('#upload').on('click', function () {
+				var form_data = new FormData();
+				var ins = document.getElementById('multiFiles').files.length;
+				
+				if(ins == 0) {
+					$('#msg').html('<span style="color:red">Select at least one file</span>');
+					return;
+				}
+				
+				for (var x = 0; x < ins; x++) {
+					form_data.append("files[]", document.getElementById('multiFiles').files[x]);
+				}
+				
+				$.ajax({
+					url: 'process_img',
+					dataType: 'json', 
+					cache: false,
+					contentType: false,
+					processData: false,
+					data: form_data,
+					type: 'post',
+					success: function (data) {
+						document.getElementById("op").innerHTML = data['caption'];
+					},	
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>
