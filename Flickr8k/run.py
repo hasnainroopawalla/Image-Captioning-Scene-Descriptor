@@ -1,15 +1,18 @@
-from flask import Flask,flash,jsonify,request,render_template,redirect,url_for
-from PIL import Image
-import numpy
-import cv2
-import time
-import werkzeug
 import os
+import pickle
+
+import cv2
+import numpy as np
+import werkzeug
+from flask import (Flask, flash, jsonify, redirect, render_template, request,
+                   url_for)
+from PIL import Image
+
 import predict
 
 app = Flask(__name__)
 
-objs = []
+input_img_path = 'static/images/input_img.jpg'
 
 @app.route("/")
 def firstpage():
@@ -19,47 +22,11 @@ def firstpage():
 def objectdetection():
     file = request.files.getlist('files[]')[0]
     inputimg = Image.open(file).convert('RGB')
-    img = numpy.array(inputimg)
+    img = np.array(inputimg)
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
-    cv2.imwrite('input_img.png',img)
-
+    cv2.imwrite(input_img_path,img)
+    predict.predict_caption(input_img_path, is_test=0)
     return jsonify({'caption' : 'Files successfully uploaded'})
 
 if __name__ == "__main__":
-    app.run(host= '0.0.0.0', port=5000, debug=True)
-
-    # import maskrcnn
-    # import yolo
-    # global objs
-    # file = request.files['file']
-    # inputimg = Image.open(file).convert('RGB')
-    # img = numpy.array(inputimg)
-
-    # cv2.imwrite('static/flaskimgs/flaskimg.jpg',cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
-    
-    # print()
-    # start = time.time()
-    # maskrcnn_objs = maskrcnn.getobj(img)
-    # end = time.time()
-    # print('\nMask-RCNN:')
-    # print(maskrcnn_objs)
-    # print('Time:',end-start)
-    # print()
-    # masktime = (end-start)
-    # # mkeys, mvalues = zip(*maskrcnn_objs.items())
-
-    # start = time.time()
-    # yolo_objs = yolo.getobj(img)
-    # end = time.time()
-    # print('YOLO V3:')
-    # print(yolo_objs)
-    # print('Time:',end-start)
-    # print()
-    # yolotime = (end-start)
-    # # ykeys, yvalues = zip(*yolo_objs.items())
-    
-
-    # # maskout = cv2.imread('static/images/maskrcnn_out.png')
-    # # yoloout = cv2.imread('static/images/yolo_out.png')
-    # # return render_template('display.html',maskout=maskout, yoloout=yoloout)
-
+    app.run(host= '0.0.0.0', port=5000, debug=False)
