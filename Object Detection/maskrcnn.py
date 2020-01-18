@@ -52,6 +52,7 @@ def getobj(image):
 
   model = modellib.MaskRCNN(mode="inference", config=config,
     model_dir=os.getcwd())
+  print(model.summary())
   model.load_weights(COCO_MODEL_PATH, by_name=True)
 
 
