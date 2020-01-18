@@ -25,8 +25,8 @@ def objectdetection():
     img = np.array(inputimg)
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     cv2.imwrite(input_img_path,img)
-    predict.predict_caption(input_img_path, is_test=0)
-    return jsonify({'caption' : 'Files successfully uploaded'})
+    caption = predict.predict_caption(input_img_path, is_test=0)
+    return jsonify({'caption' : caption})
 
 if __name__ == "__main__":
     app.run(host= '0.0.0.0', port=5000, debug=False)

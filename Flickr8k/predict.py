@@ -136,7 +136,8 @@ def beam_search_predictions(image_file, is_test, beam_index):
         return final_caption
 
 def predict_caption(img_path, is_test):
-    print ('Greedy search:', greedy_search_predictions(img_path, is_test))
-    print ('Beam Search, k=3:', beam_search_predictions(img_path, is_test, beam_index=3))
-    print ('Beam Search, k=5:', beam_search_predictions(img_path, is_test, beam_index=5))
-    print ('Beam Search, k=7:', beam_search_predictions(img_path, is_test, beam_index=7))
+    return greedy_search_predictions(img_path, is_test)
+    #print ('Greedy search:', greedy_search_predictions(img_path, is_test))
+    #print ('Beam Search, k=3:', beam_search_predictions(img_path, is_test, beam_index=3))
+    #print ('Beam Search, k=5:', beam_search_predictions(img_path, is_test, beam_index=5))
+    #print ('Beam Search, k=7:', beam_search_predictions(img_path, is_test, beam_index=7))
