@@ -5,6 +5,7 @@ import cv2
 import time
 import werkzeug
 import os
+import predict
 
 app = Flask(__name__)
 
