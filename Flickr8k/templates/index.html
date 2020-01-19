@@ -1,7 +1,7 @@
 <html>
 
   <head>
-    <title>Bootstrap Example</title>
+    <title>Image Captioning - Scene Descriptor</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -12,20 +12,22 @@
 
   </head>
 
-<body style="background: #EFF4F7";>
-  <div class="container mt-3">
-    <h2>Upload Image</h2>
-      <div class="custom-file mb-3">
-        <input onchange="readURL(this);" type=file class="custom-file-input" id="multiFiles" name="files[]" multiple="multiple">
-        <label class="custom-file-label" for="customFile">Choose file</label>
-      </div>
-        <button id=upload class="btn btn-primary">Submit</button>
-      <br><br><br>
-      <div class="custom-file mb-3">
-        <img id="blah" src="#"/><br><br>
-        <p id="caption">Caption Goes Here</p>
-      </div>
-      </div>
+  <body style="background: #EFF4F7";>
+    <div class="container-fluid" style="margin-top:2%;">
+        <div class="custom-file mb-3">
+          <input onchange="readURL(this);" type=file class="custom-file-input" id="multiFiles" name="files[]" multiple="multiple">
+          <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+          <button id=upload class="btn btn-primary">Submit</button><br><br>
+          <div class="row">
+            <div class="col-lg-6">
+                <img class="img-fluid" id="blah" src="#"/>
+            </div>
+            <div class="col-lg-6">
+              <p id="caption">Caption Goes Here</p>
+            </div>
+          </div>           
+        </div>
   </div>
 
   <div id="loader"></div>

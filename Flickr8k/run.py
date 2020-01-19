@@ -26,7 +26,8 @@ def objectdetection():
     img = np.array(inputimg)
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     cv2.imwrite(input_img_path,img)
-    caption = predict.predict_caption(input_img_path, is_test=0)
+    caption, acc = predict.predict_caption(input_img_path, is_test=0)
+    print(acc)
     return jsonify({'caption' : caption})
 
 if __name__ == "__main__":

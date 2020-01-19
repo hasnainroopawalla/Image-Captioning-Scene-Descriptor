@@ -72,6 +72,7 @@ def greedy_search_predictions(image_file, is_test):
     global graph
     with graph.as_default():
         start_word = ["<start>"]
+        acc = []
         while 1:
             now_caps = [word_idx[i] for i in start_word]
             now_caps = sequence.pad_sequences([now_caps], maxlen=max_length, padding='post')
@@ -81,13 +82,15 @@ def greedy_search_predictions(image_file, is_test):
                 e = encode(image_file)
             preds = caption_model.predict([np.array([e]), np.array(now_caps)])
             word_pred = idx_word[np.argmax(preds[0])]
+            print('np.argmax:',preds[0][np.argmax(preds[0])])
+            acc.append(preds[0][np.argmax(preds[0])])
             start_word.append(word_pred)
             
             # Keep predicting next word until <end> is predicted or caption length > max_length
             if word_pred == "<end>" or len(start_word) > max_length: 
                 break
             
-        return ' '.join(start_word[1:-1])
+        return ' '.join(start_word[1:-1]), acc
 
 def beam_search_predictions(image_file, is_test, beam_index):
     global graph
