@@ -14,11 +14,69 @@
 
   <body style="background: #EFF4F7";>
     <div class="container-fluid" style="margin-top:2%;">
-        <div class="custom-file mb-3">
-          <input onchange="readURL(this);" type=file class="custom-file-input" id="multiFiles" name="files[]" multiple="multiple">
-          <label class="custom-file-label" for="customFile">Choose file</label>
+
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+          <div class="custom-file mb-3">
+            <input onchange="readURL(this);" type=file class="custom-file-input" id="multiFiles" name="files[]" multiple="multiple">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+          </div>
         </div>
-          <button id=upload class="btn btn-primary">Submit</button><br><br>
+        <div class="col-md-3"></div>
+      </div>
+
+
+      <div class="row">
+        <!-- Search Type -->
+        <div class="col-lg-3"></div>
+        <div class="col-lg-3">
+          <div class="input-group">
+            <div class="input-group-btn">
+              <button type="button" id="searchtype1" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Search Function
+              </button>
+              <div class="dropdown-menu" id="searchtype">
+                <a class="dropdown-item" href="#">Greedy Search</a>
+                <a class="dropdown-item" href="#">Beam Search k=3</a>
+                <a class="dropdown-item" href="#">Beam Search k=5</a>
+                <a class="dropdown-item" href="#">Beam Search k=7</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- Search Type -->
+
+      <!-- Preprocess -->
+        <div class="col-lg-3">
+          <div class="input-group">
+            <div class="input-group-btn">
+              <button type="button" id="prepr1" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Preprocess
+              </button>
+              <div class="dropdown-menu" id="prepr">
+                <a class="dropdown-item" href="#" value="asd">Preprocess: Yes</a>
+                <a class="dropdown-item" href="#">Preprocess: No</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3"></div>
+
+      </div>
+      <!-- Preprocess -->
+
+      <div class="row">
+        <div class="col-lg-5"></div>
+        <div class="col-lg-2">
+          <button id=upload class="btn btn-success">Submit</button><br><br>
+          </div>
+          <div class="col-lg-5"></div>
+        </div>
+
+        </div> 
+
           <div class="row">
             <div class="col-lg-6">
                 <img class="img-fluid" id="showimg" src="#"/>
@@ -47,6 +105,13 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript">
 
+	$('#searchtype a').on('click', function(){    
+      $('#searchtype1').html($(this).html());    
+  })
+  $('#prepr a').on('click', function(){    
+      $('#prepr1').html($(this).html());    
+  })
+  
   //Preview Image
   function readURL(input) {
           if (input.files && input.files[0]) {
@@ -66,27 +131,30 @@
 		$(document).ready(function (e) {
       document.getElementById("loader").style.display = "none";
 			$('#upload').on('click', function () {
+        
 				var form_data = new FormData();
+
+        form_data.append("preprocess",$('#prepr1').html());
+        form_data.append("searchtype",$('#searchtype1').html());
+
 				var ins = document.getElementById('multiFiles').files.length;
-				
+
 				if(ins == 0) {
           alert('No file selected');
-					$('#msg').html('<span style="color:red">Select at least one file</span>');
-					return;
-				}
+          return;
+				} 
 				
-				for (var x = 0; x < ins; x++) {
+			  for (var x = 0; x < ins; x++) {
 					form_data.append("files[]", document.getElementById('multiFiles').files[x]);
 				}
-				
+        
 				$.ajax({
-					url: 'process_img',
-					dataType: 'json', 
-					cache: false,
-					contentType: false,
-					processData: false,
-					data: form_data,
-					type: 'post',
+					  type: 'POST',
+            url: '/process_img',
+            data: form_data,
+            contentType: false,
+            cache: false,
+            processData: false,
           beforeSend: function(){
             document.getElementById("loader").style.display = "block";
           },
