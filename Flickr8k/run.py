@@ -22,7 +22,7 @@ def firstpage():
 @app.route("/process_img",methods=["GET", "POST"])
 def objectdetection():
 
-    preprocess = request.form['preprocess']
+    preprocess_flag = request.form['preprocess']
     searchtype = request.form['searchtype']
 
     file = request.files.getlist('files[]')[0]
@@ -30,8 +30,8 @@ def objectdetection():
     img = np.array(inputimg)
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     cv2.imwrite(input_img_path,img)
-    
-    caption, acc = predict.predict_caption(input_img_path, is_test=0)
+
+    caption, acc = predict.predict_caption(input_img_path, preprocess_flag, searchtype)
     
     str_acc = []
     str1 = " "  

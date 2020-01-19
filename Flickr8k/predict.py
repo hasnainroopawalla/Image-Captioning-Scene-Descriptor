@@ -68,7 +68,7 @@ def encode(image):
         temp_enc = np.reshape(temp_enc, temp_enc.shape[1])
         return temp_enc
 
-def greedy_search_predictions(image_file, is_test):
+def greedy_search_predictions(image_file, preprocess_flag):
     global graph
     with graph.as_default():
         start_word = ["<start>"]
@@ -76,13 +76,12 @@ def greedy_search_predictions(image_file, is_test):
         while 1:
             now_caps = [word_idx[i] for i in start_word]
             now_caps = sequence.pad_sequences([now_caps], maxlen=max_length, padding='post')
-            if is_test==1:
+            if preprocess_flag==1:
                 e = encoding_test[image_file]
             else:
                 e = encode(image_file)
             preds = caption_model.predict([np.array([e]), np.array(now_caps)])
             word_pred = idx_word[np.argmax(preds[0])]
-            #print('np.argmax:',preds[0][np.argmax(preds[0])])
             
             start_word.append(word_pred)
 
@@ -94,17 +93,17 @@ def greedy_search_predictions(image_file, is_test):
             
         return ' '.join(start_word[1:-1]), acc
 
-def beam_search_predictions(image_file, is_test, beam_index):
+def beam_search_predictions(image_file, preprocess_flag, beam_index):
     global graph
     with graph.as_default():
         start = [word_idx["<start>"]]
-        
+        acc = []
         start_word = [[start, 0.0]]
         while len(start_word[0][0]) < max_length:
             temp = []
             for s in start_word:
                 now_caps = sequence.pad_sequences([s[0]], maxlen=max_length, padding='post')
-                if is_test==1:
+                if preprocess_flag==1:
                     e = encoding_test[image_file]
                 else:
                     e = encode(image_file)
@@ -112,7 +111,8 @@ def beam_search_predictions(image_file, is_test, beam_index):
                 preds = caption_model.predict([np.array([e]), np.array(now_caps)])
                 
                 word_preds = np.argsort(preds[0])[-beam_index:]
-                
+                acc.append(preds[0][np.argmax(preds[0])])
+
                 # Getting the top Beam index = 3  predictions and creating a new list to put them back through the model
                 for w in word_preds:
                     next_cap, prob = s[0][:], s[1]
@@ -138,11 +138,25 @@ def beam_search_predictions(image_file, is_test, beam_index):
                 break
         
         final_caption = ' '.join(final_caption[1:])
-        return final_caption
+        return final_caption, acc
 
-def predict_caption(img_path, is_test):
-    return greedy_search_predictions(img_path, is_test)
-    #print ('Greedy search:', greedy_search_predictions(img_path, is_test))
-    #print ('Beam Search, k=3:', beam_search_predictions(img_path, is_test, beam_index=3))
-    #print ('Beam Search, k=5:', beam_search_predictions(img_path, is_test, beam_index=5))
-    #print ('Beam Search, k=7:', beam_search_predictions(img_path, is_test, beam_index=7))
+def predict_caption(img_path, preprocess_flag, searchtype):
+
+    if 'Yes' in preprocess_flag:
+        preprocess_flag = 0
+    else:
+        preprocess_flag = 1
+
+    if 'Greedy' in searchtype:
+        return greedy_search_predictions(img_path, preprocess_flag)
+    elif 'k=3' in searchtype:
+        return beam_search_predictions(img_path, preprocess_flag, beam_index=3)
+    elif 'k=5' in searchtype:
+        return beam_search_predictions(img_path, preprocess_flag, beam_index=5)
+    elif 'k=7' in searchtype:
+        return beam_search_predictions(img_path, preprocess_flag, beam_index=7)
+        
+    #print ('Greedy search:', greedy_search_predictions(img_path, preprocess_flag))
+    #print ('Beam Search, k=3:', beam_search_predictions(img_path, preprocess_flag, beam_index=3))
+    #print ('Beam Search, k=5:', beam_search_predictions(img_path, preprocess_flag, beam_index=5))
+    #print ('Beam Search, k=7:', beam_search_predictions(img_path, preprocess_flag, beam_index=7))
