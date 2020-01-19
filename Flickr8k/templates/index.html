@@ -8,6 +8,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/loader.css')}}">
+
   </head>
 
 <body style="background: #EFF4F7";>
@@ -21,11 +23,13 @@
       <br><br><br>
       <div class="custom-file mb-3">
         <img id="blah" src="#"/><br><br>
-        <p id="op">Caption Goes Here</p>
+        <p id="caption">Caption Goes Here</p>
       </div>
       </div>
   </div>
-  
+
+  <div id="loader"></div>
+
 </body>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -42,7 +46,12 @@
           }
       }
 
+      function showloader(){
+        document.getElementById("loader").style.display = "block";
+      }
+
 		$(document).ready(function (e) {
+      document.getElementById("loader").style.display = "none";
 			$('#upload').on('click', function () {
 				var form_data = new FormData();
 				var ins = document.getElementById('multiFiles').files.length;
@@ -64,13 +73,18 @@
 					processData: false,
 					data: form_data,
 					type: 'post',
+          beforeSend: function(){
+            document.getElementById("loader").style.display = "block";
+          },
+          complete:function(data){
+            document.getElementById("loader").style.display = "none";
+          },
 					success: function (data) {
-						document.getElementById("op").innerHTML = data['caption'];
+						document.getElementById("caption").innerHTML = data['caption'];
 					},	
 				});
 			});
 		});
 	</script>
-</body>
 
 </html>

@@ -6,6 +6,7 @@ import numpy as np
 import werkzeug
 from flask import (Flask, flash, jsonify, redirect, render_template, request,
                    url_for)
+import threading, webbrowser
 from PIL import Image
 
 import predict
@@ -29,4 +30,5 @@ def objectdetection():
     return jsonify({'caption' : caption})
 
 if __name__ == "__main__":
+    threading.Timer(1.25, lambda: webbrowser.open("http://127.0.0.1:5000")).start()
     app.run(host= '0.0.0.0', port=5000, debug=False)
