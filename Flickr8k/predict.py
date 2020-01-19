@@ -82,10 +82,12 @@ def greedy_search_predictions(image_file, is_test):
                 e = encode(image_file)
             preds = caption_model.predict([np.array([e]), np.array(now_caps)])
             word_pred = idx_word[np.argmax(preds[0])]
-            print('np.argmax:',preds[0][np.argmax(preds[0])])
-            acc.append(preds[0][np.argmax(preds[0])])
-            start_word.append(word_pred)
+            #print('np.argmax:',preds[0][np.argmax(preds[0])])
             
+            start_word.append(word_pred)
+
+            acc.append(preds[0][np.argmax(preds[0])])
+
             # Keep predicting next word until <end> is predicted or caption length > max_length
             if word_pred == "<end>" or len(start_word) > max_length: 
                 break

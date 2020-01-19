@@ -27,8 +27,13 @@ def objectdetection():
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     cv2.imwrite(input_img_path,img)
     caption, acc = predict.predict_caption(input_img_path, is_test=0)
-    print(acc)
-    return jsonify({'caption' : caption})
+    
+    str_acc = []
+    str1 = " "  
+    for i in acc:
+        str_acc.append(str(round(i*100,2)))
+
+    return jsonify({'caption':caption, 'acc':str1.join(str_acc)})
 
 if __name__ == "__main__":
     threading.Timer(1.25, lambda: webbrowser.open("http://127.0.0.1:5000")).start()
