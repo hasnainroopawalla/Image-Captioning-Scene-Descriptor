@@ -58,7 +58,7 @@
               Preprocess
               </button>
               <div class="dropdown-menu" id="prepr">
-                <a class="dropdown-item" href="#" value="asd">Preprocess: Yes (Custom Images)</a>
+                <a class="dropdown-item" href="#" value="asd">Preprocess: Yes</a>  <!-- Preprocess for custom images -->
                 <a class="dropdown-item" href="#">Preprocess: No</a>
               </div>
             </div>
@@ -80,16 +80,15 @@
         </div> 
       </div>
       <div class="col col-lg-3"></div>
-
     </div>
 
         <div class="card shadow p-3 mb-5 bg-white rounded">
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-6"><p id="imgdim">Resolution: </p>
                 <img class="img-fluid" id="showimg" src="#"/>
             </div>
             <div class="col-lg-6">
-              <p id="caption">Predicted Caption</p>
+              <p class="font-weight-bold" id="caption">Predicted Caption</p>
 
               <table id="caption_table" class="table table-bordered">
                 <thead>
@@ -125,6 +124,11 @@
           if (input.files && input.files[0]) {
               var reader = new FileReader();
               reader.onload = function (e) {
+                var img = new Image;
+                img.src = reader.result;
+                img.onload = function() {
+                  $('#imgdim').text('Resolution: '+img.width.toString()+'x'+img.height.toString());
+                };
                   $('#showimg')
                       .attr('src', e.target.result);
               };
@@ -190,7 +194,7 @@
               var conf  = newRow.insertCell(1);
               
               var captxt  = document.createTextNode(caption[i]);
-              var acctxt = document.createTextNode(acc[i]);
+              var acctxt = document.createTextNode(acc[i].toString()+'%');
 
               genword.appendChild(captxt);
               conf.appendChild(acctxt);
