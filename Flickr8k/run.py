@@ -10,6 +10,7 @@ import threading, webbrowser
 from PIL import Image
 
 import predict
+from timeit import default_timer as timer
 
 app = Flask(__name__)
 
@@ -30,15 +31,17 @@ def objectdetection():
     img = np.array(inputimg)
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     cv2.imwrite(input_img_path,img)
+    start = timer()
 
     caption, acc = predict.predict_caption(input_img_path, preprocess_flag, searchtype)
-    
+
+    end = timer()
     str_acc = []
     str1 = " "  
     for i in acc:
         str_acc.append(str(round(i*100,2)))
 
-    return jsonify({'caption':caption, 'acc':str1.join(str_acc)})
+    return jsonify({'caption':caption, 'acc':str1.join(str_acc), 'time':round(end-start,2)})
 
 if __name__ == "__main__":
     threading.Timer(1.25, lambda: webbrowser.open("http://127.0.0.1:5000")).start()

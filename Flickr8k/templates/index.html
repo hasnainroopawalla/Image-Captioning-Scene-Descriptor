@@ -89,7 +89,7 @@
             </div>
             <div class="col-lg-6">
               <p class="font-weight-bold" id="caption">Predicted Caption</p>
-
+              <p id="time"></p>
               <table id="caption_table" class="table table-bordered">
                 <thead>
                   <tr>
@@ -175,6 +175,7 @@
           },
 					success: function (data) {
 						document.getElementById("caption").innerHTML = data['caption'];
+            document.getElementById("time").innerHTML = "Processing Time: "+data['time'].toString()+" seconds";
             var table = document.getElementById("caption_table");
             for(var i = table.rows.length - 1; i > 0; i--)
             {
