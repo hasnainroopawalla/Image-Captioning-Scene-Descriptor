@@ -14,13 +14,16 @@
 
   <body style="background: #EFF4F7";>
     <div class="container-fluid" style="margin-top:2%;">
-      <div class="card shadow p-3 mb-5 bg-white rounded">
       <div class="row">
-          <div class="col-md-3"></div>
-          <div class="col-md-6">
-          <div class="custom-file mb-3">
-            <input onchange="readURL(this);" type=file class="custom-file-input" id="multiFiles" name="files[]" multiple="multiple">
-            <label class="custom-file-label" for="customFile">Choose file</label>
+        <div class="col col-lg-3"></div>
+        <div class="col col-lg-6">
+          <div class="card shadow p-3 mb-5 bg-white rounded">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+            <div class="custom-file mb-3">
+              <input onchange="readURL(this);" type=file class="custom-file-input" id="multiFiles" name="files[]" multiple="multiple">
+              <label class="custom-file-label" for="customFile">Choose file</label>
           </div>
         </div>
         <div class="col-md-3"></div>
@@ -33,7 +36,7 @@
         <div class="col-lg-3">
           <div class="input-group">
             <div class="input-group-btn">
-              <button type="button" id="searchtype1" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" id="searchtype1" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Search Function
               </button>
               <div class="dropdown-menu" id="searchtype">
@@ -51,7 +54,7 @@
         <div class="col-lg-3">
           <div class="input-group">
             <div class="input-group-btn">
-              <button type="button" id="prepr1" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" id="prepr1" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Preprocess
               </button>
               <div class="dropdown-menu" id="prepr">
@@ -66,7 +69,7 @@
       </div>
       <!-- Preprocess -->
       
-      <div class="row">
+      <div class="row" style="margin-top: 10px;">
         <div class="col-lg-5"></div>
         <div class="col-lg-2">
           <button id=upload class="btn btn-success">Submit</button><br><br>
@@ -75,6 +78,10 @@
         </div>
 
         </div> 
+      </div>
+      <div class="col col-lg-3"></div>
+
+    </div>
 
         <div class="card shadow p-3 mb-5 bg-white rounded">
           <div class="row">
