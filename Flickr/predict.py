@@ -31,7 +31,7 @@ caption_model_architecture_path = 'static/caption_model_8k.json'
 caption_model_path = '../../weights/flickr/caption_model_weights_8k.h5'
 
 caption_model_architecture_path_30k = 'static/caption_model_30k.json'
-caption_model_path_30k = '../../weights/flickr/caption_model_weights_30k.h5'
+caption_model_path_30k = '../../weights/flickr/caption_model_weights_30k_2.h5'
 
 #def initialize_models():
 encoding_test = pickle.load(open(test_encoding_path, 'rb'))
