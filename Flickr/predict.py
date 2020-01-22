@@ -20,22 +20,22 @@ from keras.preprocessing import image, sequence
 from PIL import Image
 from tqdm import tqdm
 
-test_encoding_path = 'static/encoded_test_images_inceptionV3.p'
+test_encoding_path = 'Flickr8k_text/encoded_test_images_inceptionV3_8k.p'
 
-vocab_path_8k = 'static/vocab_8k.p'
-vocab_path_30k = 'static/vocab_30k.p'
+vocab_path_8k = 'Flickr8k_text/vocab_8k.p'
+vocab_path_30k = 'Flickr30k_text/vocab_30k.p'
 
 inception_model_path = 'static/inception_model.h5'
 
-caption_model_architecture_path = 'static/caption_model_8k.json'
-caption_model_path = '../../weights/flickr/caption_model_weights_8k.h5'
+caption_model_architecture_path_8k = 'Flickr8k_text/caption_model_8k.json'
+caption_model_path_8k = '../../weights/flickr/caption_model_weights_8k.h5'
 
-caption_model_architecture_path_30k = 'static/caption_model_30k.json'
+caption_model_architecture_path_30k = 'Flickr30k_text/caption_model_30k.json'
 caption_model_path_30k = '../../weights/flickr/caption_model_weights_30k_2.h5'
 
 #def initialize_models():
 encoding_test = pickle.load(open(test_encoding_path, 'rb'))
-vocab = pickle.load(open(vocab_path_30k, 'rb'))
+vocab = pickle.load(open(vocab_path_8k, 'rb'))
 word_idx = {val:index for index, val in enumerate(vocab)}
 idx_word = {index:val for index, val in enumerate(vocab)}
 max_length = 40
@@ -45,11 +45,11 @@ inception_model = load_model(inception_model_path)
 print("Inception Model Loaded Successfully")
 
 # Load Caption Generation Model
-json_file = open(caption_model_architecture_path_30k, 'r')
+json_file = open(caption_model_architecture_path_8k, 'r')
 model_json = json_file.read()
 json_file.close()
 caption_model = model_from_json(model_json)
-caption_model.load_weights(caption_model_path_30k)
+caption_model.load_weights(caption_model_path_8k)
 print("Caption Model Loaded Successfully")
 
 graph = tf.get_default_graph()
