@@ -19,14 +19,14 @@
         <div class="col col-lg-6">
           <div class="card shadow p-3 mb-5 bg-white rounded">
           <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
             <div class="custom-file mb-3">
               <input onchange="readURL(this);" type=file class="custom-file-input" id="multiFiles" name="files[]" multiple="multiple">
               <label class="custom-file-label" for="customFile">Choose file</label>
           </div>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-2"></div>
       </div>
 
 
@@ -85,7 +85,9 @@
         <div class="card shadow p-3 mb-5 bg-white rounded">
           <div class="row">
             <div class="col-lg-6"><p id="imgdim">Resolution: </p>
-                <img class="img-fluid" id="showimg" src="#"/>
+                <img class="img-fluid" id="showimg" src="#"/><br><br>
+                <p id="yolotime"></p>
+                <img class="img-fluid" id="yoloimg"/>
             </div>
             <div class="col-lg-6">
               <p class="font-weight-bold" id="caption">Predicted Caption</p>
@@ -125,6 +127,7 @@
               var reader = new FileReader();
               reader.onload = function (e) {
                 var img = new Image;
+
                 img.src = reader.result;
                 img.onload = function() {
                   $('#imgdim').text('Resolution: '+img.width.toString()+'x'+img.height.toString());
@@ -135,6 +138,10 @@
               reader.readAsDataURL(input.files[0]);
           }
       }
+
+      $('#multiFiles').on('change',function(){
+            $(this).next('.custom-file-label').html($(this).val().replace(/^.*[\\\/]/, ''));
+        });
 
       function showloader(){
         document.getElementById("loader").style.display = "block";
@@ -174,8 +181,10 @@
             document.getElementById("loader").style.display = "none";
           },
 					success: function (data) {
+            $('#yoloimg').attr('src', data['yolo_img']);
 						document.getElementById("caption").innerHTML = data['caption'];
             document.getElementById("time").innerHTML = "Processing Time: "+data['time'].toString()+" seconds";
+            document.getElementById("yolotime").innerHTML = 'YOLOV3 Time: '+data['yolo_time']+" seconds";
             var table = document.getElementById("caption_table");
             for(var i = table.rows.length - 1; i > 0; i--)
             {

@@ -17,7 +17,7 @@ def firstpage():
 
 @app.route("/getobjects",methods=["GET", "POST"])
 def objectdetection():
-    import maskrcnn
+    #import maskrcnn
     import yolo
     global objs
     file = request.files['file']
@@ -26,16 +26,16 @@ def objectdetection():
 
     cv2.imwrite('static/flaskimgs/flaskimg.jpg',cv2.cvtColor(img,cv2.COLOR_BGR2RGB))
     
-    print()
-    start = time.time()
-    maskrcnn_objs = maskrcnn.getobj(img)
-    end = time.time()
-    print('\nMask-RCNN:')
-    print(maskrcnn_objs)
-    print('Time:',end-start)
-    print()
-    masktime = (end-start)
-    # mkeys, mvalues = zip(*maskrcnn_objs.items())
+    # print()
+    # start = time.time()
+    # maskrcnn_objs = maskrcnn.getobj(img)
+    # end = time.time()
+    # print('\nMask-RCNN:')
+    # print(maskrcnn_objs)
+    # print('Time:',end-start)
+    # print()
+    # masktime = (end-start)
+    # # mkeys, mvalues = zip(*maskrcnn_objs.items())
 
     start = time.time()
     yolo_objs = yolo.getobj(img)
@@ -52,8 +52,9 @@ def objectdetection():
     # yoloout = cv2.imread('static/images/yolo_out.png')
     # return render_template('display.html',maskout=maskout, yoloout=yoloout)
 
+    return render_template('display.html',yolotime=round(yolotime,3),yolo_objs=yolo_objs)
 
-    return render_template('display.html',yolotime=round(yolotime,3),masktime=round(masktime,3),maskrcnn_objs=maskrcnn_objs,yolo_objs=yolo_objs)
+    #return render_template('display.html',yolotime=round(yolotime,3),masktime=round(masktime,3),maskrcnn_objs=maskrcnn_objs,yolo_objs=yolo_objs)
 
 if __name__ == "__main__":
     app.run(host= '0.0.0.0', port=5000, debug=True)

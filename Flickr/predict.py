@@ -28,14 +28,14 @@ vocab_path_30k = 'Flickr30k_text/vocab_30k.p'
 inception_model_path = 'static/inception_model.h5'
 
 caption_model_architecture_path_8k = 'Flickr8k_text/caption_model_8k.json'
-caption_model_path_8k = '../../weights/flickr/e13_acc65_8k_original.h5'
+caption_model_path_8k = '../../weights/flickr/e18_loss83_acc74_8k.h5' #e13_acc65_8k_original
 
 caption_model_architecture_path_30k = 'Flickr30k_text/caption_model_30k.json'
 caption_model_path_30k = '../../weights/flickr/caption_model_weights_30k_3.h5'
 
 #def initialize_models():
 encoding_test = pickle.load(open(test_encoding_path, 'rb'))
-vocab = pickle.load(open(vocab_path_30k, 'rb'))
+vocab = pickle.load(open(vocab_path_8k, 'rb'))
 word_idx = {val:index for index, val in enumerate(vocab)}
 idx_word = {index:val for index, val in enumerate(vocab)}
 max_length = 40
@@ -45,11 +45,11 @@ inception_model = load_model(inception_model_path)
 print("Inception Model Loaded Successfully")
 
 # Load Caption Generation Model
-json_file = open(caption_model_architecture_path_30k, 'r')
+json_file = open(caption_model_architecture_path_8k, 'r')
 model_json = json_file.read()
 json_file.close()
 caption_model = model_from_json(model_json)
-caption_model.load_weights(caption_model_path_30k)
+caption_model.load_weights(caption_model_path_8k)
 print("Caption Model Loaded Successfully")
 
 graph = tf.get_default_graph()

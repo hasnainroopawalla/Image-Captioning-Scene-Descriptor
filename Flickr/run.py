@@ -11,6 +11,7 @@ from PIL import Image
 
 import predict
 from timeit import default_timer as timer
+import yolo
 
 app = Flask(__name__)
 
@@ -31,17 +32,21 @@ def objectdetection():
     img = np.array(inputimg)
     img = cv2.cvtColor(img,cv2.COLOR_BGR2RGB)
     cv2.imwrite(input_img_path,img)
+
+    start_yolo = timer()
+    yolo_objs, yolo_img = yolo.getobj(img)
+    end_yolo = timer()
+    
     start = timer()
-
     caption, acc = predict.predict_caption(input_img_path, preprocess_flag, searchtype)
-
     end = timer()
+
     str_acc = []
     str1 = " "  
     for i in acc:
         str_acc.append(str(round(i*100,2)))
 
-    return jsonify({'caption':caption, 'acc':str1.join(str_acc), 'time':round(end-start,2)})
+    return jsonify({'caption':caption, 'acc':str1.join(str_acc), 'time':round(end-start,2), 'yolo_time':round(end_yolo-start_yolo,2), 'yolo_img':yolo_img})
 
 if __name__ == "__main__":
     threading.Timer(1.25, lambda: webbrowser.open("http://127.0.0.1:5000")).start()

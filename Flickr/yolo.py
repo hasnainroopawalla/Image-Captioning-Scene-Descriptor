@@ -4,6 +4,8 @@ import cv2 as cv
 import subprocess
 import time
 import os
+import string 
+import random
 
 def draw_labels_and_boxes(img, boxes, confidences, classids, idxs, colors, labels):
     objs = []
@@ -123,6 +125,9 @@ def getobj(img):
     height, width = img.shape[:2]
     img, _, _, _, _, objs = infer_image(net, layer_names, height, width, img, colors, labels, confidence, threshold, show_time)
 
-    cv.imwrite("static/output/yolo_out.png", img)
-    return objs
+    res = ''.join(random.choices(string.ascii_uppercase +  #Generate random file name
+                             string.digits, k = 7)) 
+    output_path = 'static/images/yolo_out/'+str(res)+'.jpg'
+    cv.imwrite(output_path, cv.cvtColor(img,cv.COLOR_BGR2RGB))
+    return objs, output_path
 
