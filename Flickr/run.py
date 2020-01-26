@@ -9,6 +9,7 @@ from flask import (Flask, flash, jsonify, redirect, render_template, request,
 import threading, webbrowser
 from PIL import Image
 
+import predict_approach1
 import predict_approach2
 from timeit import default_timer as timer
 import yolo
@@ -37,16 +38,25 @@ def objectdetection():
     yolo_objs, yolo_img = yolo.getobj(img)
     end_yolo = timer()
     
-    start = timer()
-    caption, acc = predict_approach2.predict_caption(input_img_path, preprocess_flag, searchtype)
-    end = timer()
+    start_1 = timer()
+    caption_1, acc_1 = predict_approach1.predict_caption(input_img_path, preprocess_flag, searchtype)
+    end_1 = timer()
 
-    str_acc = []
+    start_2 = timer()
+    caption_2, acc_2 = predict_approach2.predict_caption(input_img_path, preprocess_flag, searchtype)
+    end_2 = timer()
+
+    str_acc_1 = []
     str1 = " "  
-    for i in acc:
-        str_acc.append(str(round(i*100,2)))
+    for i in acc_1:
+        str_acc_1.append(str(round(i*100,2)))
 
-    return jsonify({'caption':caption, 'acc':str1.join(str_acc), 'time':round(end-start,2), 'yolo_time':round(end_yolo-start_yolo,2), 'yolo_img':yolo_img})
+    str_acc_2 = []
+    str2 = " "  
+    for i in acc_2:
+        str_acc_2.append(str(round(i*100,2)))
+
+    return jsonify({'caption_1':caption_1, 'acc_1':str1.join(str_acc_1),'caption_2':caption_2, 'acc_2':str2.join(str_acc_2), 'time_1':round(end_1-start_1,2), 'time_2':round(end_2-start_2,2)})#'yolo_time':round(end_yolo-start_yolo,2), 'yolo_img':yolo_img})
 
 if __name__ == "__main__":
     threading.Timer(1.25, lambda: webbrowser.open("http://127.0.0.1:5000")).start()

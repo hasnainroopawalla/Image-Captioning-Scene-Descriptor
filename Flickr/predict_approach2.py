@@ -26,7 +26,7 @@ vocab_path_30k = 'Flickr30k_text/vocab_30k.p'
 inception_model_path = 'static/inception_model.h5'
 
 caption_model_architecture_path_8k = 'Flickr8k_text/approach2/approach2_model.json'
-caption_model_path_8k = '../../weights/flickr/approach2/model_20.h5' #e18_loss83_acc74_8k
+caption_model_path_8k = '../../weights/flickr/approach2/model_35.h5'
 
 caption_model_architecture_path_30k = 'Flickr30k_text/caption_model_30k.json'
 caption_model_path_30k = '../../weights/flickr/caption_model_weights_30k_3.h5'
@@ -82,7 +82,9 @@ def greedySearch(photo, preprocess_flag):
             sequence = [wordtoix[w] for w in in_text.split() if w in wordtoix]
             sequence = pad_sequences([sequence], maxlen=max_length)
             yhat = caption_model.predict([photo,sequence], verbose=0)
+            acc.append(yhat[0][np.argmax(yhat[0])])
             yhat = np.argmax(yhat)
+            
             word = ixtoword[yhat]
             in_text += ' ' + word
             if word == 'endseq':
@@ -90,8 +92,9 @@ def greedySearch(photo, preprocess_flag):
         final = in_text.split()
         final = final[1:-1]
         final = ' '.join(final)
+        print(acc)
         print(final)
-        return final
+        return final, acc
 
 '''def beam_search_predictions(image_file, preprocess_flag, beam_index):
     global graph

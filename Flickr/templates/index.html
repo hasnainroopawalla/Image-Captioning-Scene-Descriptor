@@ -83,16 +83,19 @@
     </div>
 
         <div class="card shadow p-3 mb-5 bg-white rounded">
-          <div class="row">
+          <div class="row"><div class="col-lg-3"></div>
             <div class="col-lg-6"><p id="imgdim">Resolution: </p>
                 <img class="img-fluid" id="showimg" src="#"/><br><br>
-                <p id="yolotime"></p>
-                <img class="img-fluid" id="yoloimg"/>
+                <!-- <p id="yolotime"></p>
+                <img class="img-fluid" id="yoloimg"/> -->
             </div>
+            <div class="col-lg-3"></div>
+          </div>
+          <div class="row">
             <div class="col-lg-6">
-              <p class="font-weight-bold" id="caption">Predicted Caption</p>
-              <p id="time"></p>
-              <table id="caption_table" class="table table-bordered">
+              <p class="font-weight-bold" id="caption_1">Predicted Caption</p>
+              <p id="time_1"></p>
+              <table id="caption_table_1" class="table table-bordered">
                 <thead>
                   <tr>
                     <th>Prediction</th>
@@ -102,9 +105,22 @@
                 <tbody></tbody>
               </table>
             </div>
-          </div>           
+            <div class="col-lg-6">
+              <p class="font-weight-bold" id="caption_2">Predicted Caption</p>
+              <p id="time_2"></p>
+              <table id="caption_table_2" class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Prediction</th>
+                    <th>Confidence</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>        
         </div>
-        </div>
+        
   </div>
 
   <div id="loader"></div>
@@ -181,34 +197,58 @@
             document.getElementById("loader").style.display = "none";
           },
 					success: function (data) {
-            $('#yoloimg').attr('src', data['yolo_img']);
-						document.getElementById("caption").innerHTML = data['caption'];
-            document.getElementById("time").innerHTML = "Processing Time: "+data['time'].toString()+" seconds";
-            document.getElementById("yolotime").innerHTML = 'YOLOV3 Time: '+data['yolo_time']+" seconds";
-            var table = document.getElementById("caption_table");
-            for(var i = table.rows.length - 1; i > 0; i--)
+            // $('#yoloimg').attr('src', data['yolo_img']);
+						document.getElementById("caption_1").innerHTML = data['caption_1'];
+            document.getElementById("time_1").innerHTML = "Processing Time: "+data['time_1'].toString()+" seconds";
+            document.getElementById("caption_2").innerHTML = data['caption_2'];
+            document.getElementById("time_2").innerHTML = "Processing Time: "+data['time_2'].toString()+" seconds";
+            //document.getElementById("yolotime").innerHTML = 'YOLOV3 Time: '+data['yolo_time']+" seconds";
+            var table_1 = document.getElementById("caption_table_1");
+            for(var i = table_1.rows.length - 1; i > 0; i--)
             {
-                table.deleteRow(i);
+                table_1.deleteRow(i);
+            }
+            var table_2 = document.getElementById("caption_table_2");
+            for(var i = table_2.rows.length - 1; i > 0; i--)
+            {
+                table_2.deleteRow(i);
             }
                         
-            var tableRef = document.getElementById('caption_table').getElementsByTagName('tbody')[0];
+            var tableRef_1 = document.getElementById('caption_table_1').getElementsByTagName('tbody')[0];
+            var acc_1 = data['acc_1'].split(" ");
+            var caption_1 = data['caption_1'].split(" ");
+            caption_1.push('<end>');
 
-            var acc = data['acc'].split(" ");
-            var caption = data['caption'].split(" ");
-            caption.push('<end>');
+            var tableRef_2 = document.getElementById('caption_table_2').getElementsByTagName('tbody')[0];
+            var acc_2 = data['acc_2'].split(" ");
+            var caption_2 = data['caption_2'].split(" ");
+            caption_2.push('<end>');
 
-            for(var i=0;i<acc.length;i++){
+            for(var i=0;i<acc_1.length;i++){
 
-              var newRow   = tableRef.insertRow();
+              var newRow   = tableRef_1.insertRow();
               var genword  = newRow.insertCell(0);
               var conf  = newRow.insertCell(1);
               
-              var captxt  = document.createTextNode(caption[i]);
-              var acctxt = document.createTextNode(acc[i].toString()+'%');
+              var captxt  = document.createTextNode(caption_1[i]);
+              var acctxt = document.createTextNode(acc_1[i].toString()+'%');
 
               genword.appendChild(captxt);
               conf.appendChild(acctxt);
             }
+
+            for(var i=0;i<acc_2.length;i++){
+
+              var newRow   = tableRef_2.insertRow();
+              var genword  = newRow.insertCell(0);
+              var conf  = newRow.insertCell(1);
+
+              var captxt  = document.createTextNode(caption_2[i]);
+              var acctxt = document.createTextNode(acc_2[i].toString()+'%');
+
+              genword.appendChild(captxt);
+              conf.appendChild(acctxt);
+              }
 					},	
 				});
 			});
