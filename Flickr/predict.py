@@ -10,9 +10,6 @@ import pandas as pd
 import tensorflow as tf
 from keras import backend
 from keras.applications.inception_v3 import InceptionV3
-from keras.layers import (
-    LSTM, Activation, BatchNormalization, Dense, Dropout, Embedding, Flatten,
-    Merge, RepeatVector, TimeDistributed)
 from keras.layers.wrappers import Bidirectional
 from keras.models import Model, Sequential, load_model, model_from_json
 from keras.optimizers import Adam, RMSprop

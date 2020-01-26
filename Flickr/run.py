@@ -9,7 +9,7 @@ from flask import (Flask, flash, jsonify, redirect, render_template, request,
 import threading, webbrowser
 from PIL import Image
 
-import predict
+import predict_approach2
 from timeit import default_timer as timer
 import yolo
 
@@ -38,7 +38,7 @@ def objectdetection():
     end_yolo = timer()
     
     start = timer()
-    caption, acc = predict.predict_caption(input_img_path, preprocess_flag, searchtype)
+    caption, acc = predict_approach2.predict_caption(input_img_path, preprocess_flag, searchtype)
     end = timer()
 
     str_acc = []
