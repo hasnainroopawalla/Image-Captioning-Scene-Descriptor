@@ -94,8 +94,6 @@ def greedySearch(photo, preprocess_flag):
         final = in_text.split()
         final = final[1:-1]
         final = ' '.join(final)
-        print(acc)
-        print(final)
         return final, acc
 
 '''def beam_search_predictions(image_file, preprocess_flag, beam_index):
@@ -147,26 +145,16 @@ def greedySearch(photo, preprocess_flag):
 
 def predict_caption(img_path, preprocess_flag, searchtype):
 
-    if 'Yes' in preprocess_flag:
-        preprocess_flag = 0
-    else:
-        preprocess_flag = 1
-
-    if preprocess_flag==1:
-        e = encoding_test[img_path].reshape((1,2048))
-    else:
-        e = encode(img_path).reshape(1,2048)
+ 
+    e = encode(img_path).reshape(1,2048)
 
     if 'Greedy' in searchtype:
         return greedySearch(e, preprocess_flag)
+
     '''elif 'k=3' in searchtype:
         return beam_search_predictions(img_path, preprocess_flag, beam_index=3)
     elif 'k=5' in searchtype:
         return beam_search_predictions(img_path, preprocess_flag, beam_index=5)
     elif 'k=7' in searchtype:
         return beam_search_predictions(img_path, preprocess_flag, beam_index=7)'''
-        
-    #print ('Greedy search:', greedy_search_predictions(img_path, preprocess_flag))
-    #print ('Beam Search, k=3:', beam_search_predictions(img_path, preprocess_flag, beam_index=3))
-    #print ('Beam Search, k=5:', beam_search_predictions(img_path, preprocess_flag, beam_index=5))
-    #print ('Beam Search, k=7:', beam_search_predictions(img_path, preprocess_flag, beam_index=7))
+    

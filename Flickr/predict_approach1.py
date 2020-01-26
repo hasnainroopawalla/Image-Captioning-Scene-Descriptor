@@ -80,10 +80,7 @@ def greedy_search_predictions(image_file, preprocess_flag):
         while 1:
             now_caps = [word_idx[i] for i in start_word]
             now_caps = sequence.pad_sequences([now_caps], maxlen=max_length, padding='post')
-            if preprocess_flag==1:
-                e = encoding_test[image_file]
-            else:
-                e = encode(image_file)
+            e = encode(image_file)
             preds = caption_model.predict([np.array([e]), np.array(now_caps)])
             word_pred = idx_word[np.argmax(preds[0])]
             
@@ -107,10 +104,7 @@ def beam_search_predictions(image_file, preprocess_flag, beam_index):
             temp = []
             for s in start_word:
                 now_caps = sequence.pad_sequences([s[0]], maxlen=max_length, padding='post')
-                if preprocess_flag==1:
-                    e = encoding_test[image_file]
-                else:
-                    e = encode(image_file)
+                encode(image_file)
 
                 preds = caption_model.predict([np.array([e]), np.array(now_caps)])
                 
@@ -145,11 +139,6 @@ def beam_search_predictions(image_file, preprocess_flag, beam_index):
         return final_caption, acc
 
 def predict_caption(img_path, preprocess_flag, searchtype):
-
-    if 'Yes' in preprocess_flag:
-        preprocess_flag = 0
-    else:
-        preprocess_flag = 1
 
     if 'Greedy' in searchtype:
         return greedy_search_predictions(img_path, preprocess_flag)

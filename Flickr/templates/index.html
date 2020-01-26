@@ -95,6 +95,7 @@
             <div class="col-lg-6">
               <p class="font-weight-bold" id="caption_1">Predicted Caption: Approach 1</p>
               <p id="time_1"></p>
+              <p id="bleu_1"></p>
               <table id="caption_table_1" class="table table-bordered">
                 <thead>
                   <tr>
@@ -108,6 +109,7 @@
             <div class="col-lg-6">
               <p class="font-weight-bold" id="caption_2">Predicted Caption: Approach 2</p>
               <p id="time_2"></p>
+              <p id="bleu_2"></p>
               <table id="caption_table_2" class="table table-bordered">
                 <thead>
                   <tr>
@@ -129,7 +131,7 @@
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script type="text/javascript">
-
+  var file_name;
 	$('#searchtype a').on('click', function(){    
       $('#searchtype1').html($(this).html());    
   })
@@ -157,6 +159,7 @@
 
       $('#multiFiles').on('change',function(){
             $(this).next('.custom-file-label').html($(this).val().replace(/^.*[\\\/]/, ''));
+            file_name = $(this).val().replace(/^.*[\\\/]/, '');
         });
 
       function showloader(){
@@ -168,9 +171,10 @@
 			$('#upload').on('click', function () {
         
 				var form_data = new FormData();
-
         form_data.append("preprocess",$('#prepr1').html());
         form_data.append("searchtype",$('#searchtype1').html());
+        form_data.append("file_name",file_name);
+        
 
 				var ins = document.getElementById('multiFiles').files.length;
 
@@ -200,8 +204,19 @@
             // $('#yoloimg').attr('src', data['yolo_img']);
 						document.getElementById("caption_1").innerHTML = data['caption_1'];
             document.getElementById("time_1").innerHTML = "Processing Time: "+data['time_1'].toString()+" seconds";
+            document.getElementById("bleu_1").innerHTML = "BLEU: "+data['bleu_1'];
             document.getElementById("caption_2").innerHTML = data['caption_2'];
             document.getElementById("time_2").innerHTML = "Processing Time: "+data['time_2'].toString()+" seconds";
+            document.getElementById("bleu_2").innerHTML = "BLEU: "+data['bleu_2'];
+
+            if (data['bleu_1']>data['bleu_2']){
+              document.getElementById("bleu_1").style.color = 'green';
+              document.getElementById("bleu_2").style.color = 'black';
+            }
+            else{
+              document.getElementById("bleu_2").style.color = 'green';
+              document.getElementById("bleu_1").style.color = 'black';
+            }
             //document.getElementById("yolotime").innerHTML = 'YOLOV3 Time: '+data['yolo_time']+" seconds";
             var table_1 = document.getElementById("caption_table_1");
             for(var i = table_1.rows.length - 1; i > 0; i--)
