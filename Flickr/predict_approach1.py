@@ -47,7 +47,7 @@ model_json = json_file.read()
 json_file.close()
 caption_model = model_from_json(model_json)
 caption_model.load_weights(caption_model_path_8k)
-print("Caption Model Loaded Successfully")
+print("Caption Model Approach_1 Loaded Successfully")
 
 graph = tf.get_default_graph()
 
@@ -104,7 +104,7 @@ def beam_search_predictions(image_file, preprocess_flag, beam_index):
             temp = []
             for s in start_word:
                 now_caps = sequence.pad_sequences([s[0]], maxlen=max_length, padding='post')
-                encode(image_file)
+                e = encode(image_file)
 
                 preds = caption_model.predict([np.array([e]), np.array(now_caps)])
                 

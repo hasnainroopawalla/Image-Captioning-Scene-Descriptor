@@ -1,19 +1,20 @@
 import os
 import pickle
+import threading
+import webbrowser
+from timeit import default_timer as timer
 
 import cv2
 import numpy as np
 import werkzeug
 from flask import (Flask, flash, jsonify, redirect, render_template, request,
                    url_for)
-import threading, webbrowser
 from PIL import Image
 
-import predict_approach1
-import predict_approach2
-from timeit import default_timer as timer
 # import yolo
 import bleu_rating
+import predict_approach1
+import predict_approach2
 
 app = Flask(__name__)
 
@@ -25,6 +26,9 @@ def firstpage():
 
 @app.route("/process_img",methods=["GET", "POST"])
 def objectdetection():
+
+    bleu_1 = ''
+    bleu_2 = ''
 
     preprocess_flag = request.form['preprocess']
     searchtype = request.form['searchtype']
