@@ -25,7 +25,7 @@ vocab_path_30k = 'Flickr30k_text/vocab_30k.p'
 inception_model_path = 'static/inception_model.h5'
 
 caption_model_architecture_path_8k = 'Flickr8k_text/caption_model_8k.json'
-caption_model_path_8k = '../../weights/flickr/e13_acc65_8k_original.h5' #e18_loss83_acc74_8k
+caption_model_path_8k = '../../weights/flickr/e24.h5' #e24.h5 #e13_acc65_8k_original.h5
 
 caption_model_architecture_path_30k = 'Flickr30k_text/caption_model_30k.json'
 caption_model_path_30k = '../../weights/flickr/caption_model_weights_30k_3.h5'
