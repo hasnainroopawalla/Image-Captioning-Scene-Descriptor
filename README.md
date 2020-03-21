@@ -1,3 +1,7 @@
+# Motivation for Image Captioning
+
+To generate a gramatically correct sentence which can accurately describe the scene of an image, enabling any individual to visualize the image mentally. Instead of simply detecting objects, the network aims to establish a relationship among entities in the image.
+
 # Image Captioning using Uni-Directional and Bi-Directional LSTM
 
 Image Features are extracted using InceptionV3 model(Pretrained) 
