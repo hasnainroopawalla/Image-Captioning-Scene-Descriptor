@@ -47,6 +47,8 @@ Man and Woman:
 ![Man and Woman](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture7.JPG)
 
 # Test Results (Flutter App):
+e
+The Caption Model is deployed as a REST API locally on my laptop and the Flutter Aplication fetches data using the API
 
 Dog on Beach:
 
