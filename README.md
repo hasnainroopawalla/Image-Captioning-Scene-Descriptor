@@ -48,7 +48,7 @@ Man and Woman:
 
 # Test Results (Flutter App):
 
-The Caption Model is deployed as a REST API locally on my laptop and the Flutter Aplication fetches data using it
+The Caption Model is deployed as a REST API locally on my laptop and the Flutter Application fetches data using it
 
 Dog on Beach:
 
