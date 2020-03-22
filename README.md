@@ -2,6 +2,10 @@
 
 To generate a gramatically correct sentence which can accurately describe the scene of an image, enabling any individual to visualize the image mentally. Instead of simply detecting objects, the network aims to establish a relationship among entities in the image.
 
+# Block Diagram
+
+![Block Diagram](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/architecture.JPG)
+
 # Image Captioning using Uni-Directional and Bi-Directional LSTM
 
 Image Features are extracted using InceptionV3 model(Pretrained) 
@@ -14,6 +18,10 @@ The parent folder of this repository should contain the trained caption_model we
 The Image Captioning Model is deployed as a REST API i.e., the web-app as well as our Flutter Application makes API calls to the server by sending an image and the server responds with a caption
 
 The Web-App displays the Bidirectional as well as Uni directional Approaches side-by-side and also a table for the accuracy of each predicted word
+
+# Model Architecture (Uni-Directional and Bi-Directional respectively)
+
+![Model Architecture](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/unibi.JPG)
 
 # Test Results (Flask Web-App):
 
