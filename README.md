@@ -17,7 +17,7 @@ The Web-App displays the Bidirectional as well as Uni directional Approaches sid
 
 # Test Results:
 ![Football players](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture.JPG)
-![Snowy Scene](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture1.JPG)
+![Snowy Scene](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture2.JPG)
 ![Surfboarding](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture4.JPG)
 ![Jumping Dog](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture7.JPG)
 
