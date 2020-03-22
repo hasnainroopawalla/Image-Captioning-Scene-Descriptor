@@ -16,10 +16,35 @@ The Image Captioning Model is deployed as a REST API i.e., the web-app as well a
 The Web-App displays the Bidirectional as well as Uni directional Approaches side-by-side and also a table for the accuracy of each predicted word
 
 # Test Results:
-![Football players](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture.JPG)
+
+Football players:
+
+![Football players](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture1.JPG)
+
+Snowy Scene:
+
 ![Snowy Scene](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture2.JPG)
-![Surfboarding](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture4.JPG)
-![Jumping Dog](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture7.JPG)
+
+Running Dog:
+
+![Running Dog](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture3.JPG)
+
+Jumping Dog:
+
+![Jumping Dog](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture4.JPG)
+
+2 Running Dogs:
+
+
+![2 Running Dogs](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture5.JPG)
+
+Snowboarder:
+
+![Snowboarder](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture6.JPG)
+
+Man and Woman:
+
+![Man and Woman](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture7.JPG)
 
 The BLEU Metric has been used to evaluate the test images. A higher BLEU rating (closer to 1) corresponds to an accurate description
 
