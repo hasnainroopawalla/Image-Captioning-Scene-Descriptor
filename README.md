@@ -15,7 +15,7 @@ The Image Captioning Model is deployed as a REST API i.e., the web-app as well a
 
 The Web-App displays the Bidirectional as well as Uni directional Approaches side-by-side and also a table for the accuracy of each predicted word
 
-# Test Results:
+# Test Results (Flask Web-App):
 
 Football players:
 
@@ -45,6 +45,26 @@ Snowboarder:
 Man and Woman:
 
 ![Man and Woman](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture7.JPG)
+
+# Test Results (Flutter App):
+
+Dog on Beach:
+
+![Dog on Beach](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture8.jpeg)
+
+3 Dogs:
+
+![3 Dogs](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture9.jpeg)
+
+Dog Jumping over Hurdle:
+
+![Dog Jumping over Hurdle](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture10.jpeg)
+
+Basketball Boy:
+
+![Basketball Boy](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture11.jpeg)
+
+# Evaluation Metric
 
 The BLEU Metric has been used to evaluate the test images. A higher BLEU rating (closer to 1) corresponds to an accurate description
 
