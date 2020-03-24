@@ -11,7 +11,8 @@ To generate a gramatically correct sentence which can accurately describe the sc
 Image Features are extracted using InceptionV3 model(Pretrained) 
 Captioning Model is trained on the Flickr8k Dataset
 
-Execute 'run.py' in the 'Flickr' directory
+Navigate to the 'Flickr' directory in the command prompt:
+```python run.py```
 
 The parent folder of this repository should contain the trained caption_model weights.
 
@@ -43,16 +44,7 @@ Jumping Dog:
 
 2 Running Dogs:
 
-
 ![2 Running Dogs](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture5.JPG)
-
-Snowboarder:
-
-![Snowboarder](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture6.JPG)
-
-Man and Woman:
-
-![Man and Woman](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture7.JPG)
 
 # Test Results (Flutter App):
 
