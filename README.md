@@ -11,7 +11,8 @@ To generate a gramatically correct sentence which can accurately describe the sc
 Image Features are extracted using InceptionV3 model(Pretrained) 
 Captioning Model is trained on the Flickr8k Dataset
 
-Execute 'run.py' in the 'Flickr' directory
+Navigate to the 'Flickr' directory in the command prompt:
+```python run.py```
 
 The parent folder of this repository should contain the trained caption_model weights.
 
