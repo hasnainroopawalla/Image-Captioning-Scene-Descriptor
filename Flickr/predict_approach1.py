@@ -17,6 +17,9 @@ from keras.preprocessing import image, sequence
 from PIL import Image
 from tqdm import tqdm
 
+
+np.set_printoptions(threshold=30)
+
 test_encoding_path = 'Flickr8k_text/encoded_test_images_inceptionV3_8k.p'
 
 vocab_path_8k = 'Flickr8k_text/vocab_8k.p'
@@ -31,6 +34,7 @@ caption_model_architecture_path_30k = 'Flickr30k_text/caption_model_30k.json'
 caption_model_path_30k = '../../weights/flickr/caption_model_weights_30k_3.h5'
 
 #def initialize_models():
+
 encoding_test = pickle.load(open(test_encoding_path, 'rb'))
 vocab = pickle.load(open(vocab_path_8k, 'rb'))
 word_idx = {val:index for index, val in enumerate(vocab)}
@@ -70,6 +74,7 @@ def encode(image):
         image = preprocess(image)
         temp_enc = inception_model.predict(image)
         temp_enc = np.reshape(temp_enc, temp_enc.shape[1])
+       # print(temp_enc)
         return temp_enc
 
 def greedy_search_predictions(image_file, preprocess_flag):
@@ -77,10 +82,12 @@ def greedy_search_predictions(image_file, preprocess_flag):
     with graph.as_default():
         start_word = ["<start>"]
         acc = []
+        e = encode(image_file)
+        print(e)
         while 1:
             now_caps = [word_idx[i] for i in start_word]
             now_caps = sequence.pad_sequences([now_caps], maxlen=max_length, padding='post')
-            e = encode(image_file)
+            print(now_caps)
             preds = caption_model.predict([np.array([e]), np.array(now_caps)])
             word_pred = idx_word[np.argmax(preds[0])]
             

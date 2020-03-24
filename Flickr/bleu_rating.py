@@ -12,5 +12,8 @@ for i in range(len(image_captions)-1):
     else:
         caption[id_capt[0]] = [id_capt[1]]
 
+
 def get_bleu(img_path, pred_caption):
+    for i in caption[img_path]:
+        print(i)
     return round(sentence_bleu(caption[img_path], pred_caption),4)
