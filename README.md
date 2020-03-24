@@ -44,16 +44,7 @@ Jumping Dog:
 
 2 Running Dogs:
 
-
 ![2 Running Dogs](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture5.JPG)
-
-Snowboarder:
-
-![Snowboarder](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture6.JPG)
-
-Man and Woman:
-
-![Man and Woman](https://github.com/hasnainroopawalla/Image-Captioning-Scene-Descriptor/blob/master/images/Capture7.JPG)
 
 # Test Results (Flutter App):
 
