@@ -83,11 +83,10 @@ def greedy_search_predictions(image_file, preprocess_flag):
         start_word = ["<start>"]
         acc = []
         e = encode(image_file)
-        print(e)
+##        print(e)
         while 1:
             now_caps = [word_idx[i] for i in start_word]
             now_caps = sequence.pad_sequences([now_caps], maxlen=max_length, padding='post')
-            print(now_caps)
             preds = caption_model.predict([np.array([e]), np.array(now_caps)])
             word_pred = idx_word[np.argmax(preds[0])]
             
